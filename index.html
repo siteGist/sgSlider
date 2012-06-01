@@ -1,0 +1,1086 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>sgSlider - simple jQuery slideshow plugin</title>
+	<!-- Main page styles -->
+	<link rel="stylesheet" href="assets/main.css" />	
+	
+	<!-- Enabeling jQuery lib -->
+	<script type="text/javascript" src="assets/jquery-1.7.1.min.js"></script>
+	
+	<!-- Page code, not important for plugin -->
+	<script type="text/javascript" src="assets/main.js"></script>
+	
+	<!-- html5 markup for IE -->
+	<!--[if lt IE 9]><script src="assets/html5.js"></script><![endif]-->
+	
+	<!-- For mor visual commenting we enable the code higlight -->
+    <script type="text/javascript" src="assets/jquery.snippet.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/jquery.snippet.min.css" />
+
+	<!-- And finally the plugin itself -->
+	<link rel="stylesheet" href="plugin/jquery.sgSlider_0.1.css" />
+	<script type="text/javascript" src="plugin/jquery.sgSlider_0.1.js"></script>
+	
+	<!-- Custom styles for plugin reslt styling -->
+	<style type="text/css">
+		/* for content styles */
+		.customStyleForCustomContent { height: 100px; width: 300px; vertical-align: middle; text-align: center; font-size: 2em; font-style: italic; font-weight: bold; color: white; background-color: #B5B7B5; }
+			.customStyleForCustomContent:hover { background-color: #B8BAB8; }
+		/* for plugin arrows */
+			a.navi {
+				background-color: #D7D9D7;
+				color: #B5B7B5;
+				font-size: 3em;
+				font-weight: bold;
+				text-decoration: none;
+				text-align: center;
+				line-height: 0px;
+				padding-top: 46px;
+				position: absolute;
+				left: -22px;
+				top: 0;
+				height: 54px;
+				width: 22px;
+				z-index: 1;
+			}
+				a.navi:hover {
+					color: white;
+					background-color: #C6C8C6;
+				}
+				a.navi.disabled {
+					background-color: #FAFAFA;
+					color: #B5B7B5;
+					/*
+					display: none;
+					visibility: hidden;
+					*/
+				}
+				a.next {
+					left: auto;
+					right: -22px;
+				}
+		/* some more styles into plugin items */
+		.slider img, .slider ul, .slider li { line-height: 0px; padding: 0px; margin: 0px; }
+		#sliderDiferentHWBottom, #sliderDiferentHWTop { overflow: hidden; visibility: hidden; height: 178px; }
+		#sliderDiferentHWBottom { border: 22px solid  #BA9877; border-width: 22px 22px; height: 171px; }
+		#sliderDiferentHWBottom .item { display: table; }
+			#sliderDiferentHWBottom a { height: 100%; display: table-cell; vertical-align: middle; }
+			#sliderDiferentHWBottom a.navi { background-color: #BA9877; color: white; height: 92px; padding-top: 80px; }
+				#sliderDiferentHWBottom a.navi:hover { background-color: white; color: #BA9877; }
+				#sliderDiferentHWBottom a.navi.disabled { display: none; }
+		.slider li { opacity: 0.75; }
+			.slider li:hover, .slider li.curr { opacity: 1; }
+			.slider li.curr { background-color: #BA9877; }
+		#sliderVerticalWide, #sliderVerticalWide2 { margin: 40px 0; height: 280px; float: left; width: 300px; overflow: hidden; visibility: hidden; }
+		#sliderVerticalWide2 { float: right; }
+			#sliderVerticalWide a.navi, #sliderVerticalWide2 a.navi { color: #BA9877; background-color: white; font-size: 1em; line-height: 30px; padding: 0px; left: 0; top: -30px; height: 30px; width: 100%; }
+				#sliderVerticalWide a.next, #sliderVerticalWide2 a.next { top: auto; bottom: -30px; border-width: 0 3px 3px 3px; right: 0px; }
+				#sliderVerticalWide a.navi:hover, #sliderVerticalWide2 a.navi:hover { background-color: #BA9877; color: white; }
+				#sliderVerticalWide a.navi.disabled, #sliderVerticalWide2 a.navi.disabled { background-color: white; color: #F7F9F7; border-color: #F7F9F7; }
+	</style>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#sliderDiferentHWBottom').sgSlider({
+				step: 2,
+				navigation: { use: true },
+				autoNext: {
+					// enable: true,
+					way: [1,'+4','1300px',-7],
+					repeat: 7
+				},
+				animateWhenShowEnds: true,
+				currOnHover: {enable: true},
+				onStart: function() {
+					$('#sliderDiferentHWBottom').css({overflow: 'visible', visibility: 'visible'}).fadeTo(0,0).fadeTo(3000,1);
+				}
+			});
+			$('#sliderDiferentHWTop').sgSlider({
+				navigation: { use: false },
+				autoNext: {
+					// enable: true
+				},
+				scrollOnHover: {enable: true, maxJump: 0.3},
+				onStart: function() {
+					$('#sliderDiferentHWTop').css({overflow: 'visible', visibility: 'visible'}).fadeTo(0,0).fadeTo(3000,1);
+				}
+			});
+			$('#sliderVerticalWide').sgSlider({
+				vertical: true,
+				reverse: true,
+				autoNext: {
+					enable: true
+				},
+				navigation: { text: {
+					prev: 'scroll Top',
+					next: 'scroll Down'
+				} },
+				onStart: function() {
+					$('#sliderVerticalWide').css({overflow: 'visible', visibility: 'visible'}).fadeTo(0,0).fadeTo(3000,1);
+				}
+			});
+			$('#sliderVerticalWide2').sgSlider({
+				vertical: true,
+				step: '2',
+				autoNext: {
+					// enable: true
+				},
+				animateWhenShowEnds: true,
+				carousell: {
+					enable: true
+				},
+				navigation: { text: {
+					prev: 'scroll Top',
+					next: 'scroll Down'
+				} },
+				onStart: function() {
+					$('#sliderVerticalWide2').css({overflow: 'visible', visibility: 'visible'}).fadeTo(0,0).fadeTo(3000,1);
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+		<section id="root">
+			<h1>sgSlider <small>- simple jQuery slideshow plugin</small></h1>
+			<h2>Demonstration</h2>
+			<article class="demoText">
+				<div id="sliderDiferentHWBottom" class="slider">
+					<div>
+						<ol>
+							<li><a href="#"><img src="assets/img/images_012.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_013.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_014.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_015.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_016.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_017.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_018.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_019.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_020.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_021.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_022.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_023.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_024.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_025.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_026.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_027.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_028.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_029.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_030.jpg" alt="sgSlider demonstration image"/></a></li>
+						</ol>
+					</div>
+				</div>
+				<div id="sliderVerticalWide" class="slider">
+					<div>
+						<ul>
+							<li><img src="assets/img/wide/images_001.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_002.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_003.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_004.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_005.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_006.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_007.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_008.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_009.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_010.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_011.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_012.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_013.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_014.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_015.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+						</ul>
+					</div>
+				</div>
+				<div id="sliderVerticalWide2" class="slider">
+					<div>
+						<ul>
+							<li><img src="assets/img/wide/images_015.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_016.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_017.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_018.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_019.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_020.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_021.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_022.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_023.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_024.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_025.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_026.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_027.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_028.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_029.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+							<li><img src="assets/img/wide/images_030.jpg" alt="sgSlider demonstration image" width="300" height="90"/></li>
+						</ul>
+					</div>
+				</div>
+				<header style=" margin: 40px 320px; width: 258px; ">
+					<h1 style=" line-height: 34px; padding: 0px; ">
+						sgSlider<br />
+						<small style=" font-size: 24px; ">seriously great slider</small>
+					</h1>
+					<ul style="padding: 0 0 0 20px;">
+						<li>Checks if images had been uploaded</li>
+						<li>Reverse pixels/item counting </li>
+						<li>Has callback for current item</li>
+						<li>Vertical and Horisontal views</li>
+						<li>Cilcular movment animation</li>
+						<li>Custom animation steps</li>
+						<li>Animation in end</li>
+						<li>Diferent callbaks</li>
+						<li>Easy styling</li>
+					</ul>
+				</header>
+				<div style="clear: both;"></div>
+				<div id="sliderDiferentHWTop" class="slider">
+					<div>
+						<ol>
+							<li><a href="#"><img src="assets/img/images_001.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_002.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_003.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_004.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_005.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_006.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_007.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_008.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_009.jpg" alt="sgSlider demonstration image"/></a></li>
+							<li><a href="#"><img src="assets/img/images_010.jpg" alt="sgSlider demonstration image"/></a></li>
+						</ol>
+					</div>
+				</div>
+			</article>
+			<h3 class="expandable">The simple Guide <small>- click to expand</small></h3>
+			<article class="h3text">
+				<p>
+					First we build an HTML structure, or simply the <code class="html">&lt;tag/&gt;</code> container
+					<pre class="html">
+&lt;div id="slider"&gt;
+	&lt;div&gt;
+	   &lt;ul&gt; &lt;!-- Or in this case you can use &lt;ol/&gt; --&gt
+			&lt;li&gt;
+				The first Slide Content
+			&lt;/li&gt;
+			&lt;li&gt;
+				The second Slide Content
+			&lt;/li&gt;
+			&lt;li&gt;
+				...
+			&lt;/li&gt;
+	   &lt;/ul&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</pre>
+					We have another option, more simple wrapping:
+					<pre class="html">
+&lt;div id="slider"&gt;
+	&lt;li&gt;
+		The first Slide Content
+	&lt;/li&gt;
+	&lt;div&gt; &lt;!-- We can use div`s also ... --&gt;
+		The second Slide Content
+	&lt;/div&gt;
+	&lt;article&gt; &lt;!-- ... and other alowed in structure tags --&gt;
+		...
+	&lt;/article&gt;
+&lt;/div&gt;</pre>
+				</p>
+				<p>
+					If we are sutisfied with item view, then we can skip this step.
+					Otherwise ...
+					<pre class="html">
+&lt;!-- we give some styles into --&gt;
+&lt;style type="text/css" &gt;
+	/* style here */
+&lt;style&gt;
+&lt;!-- ... or into css file included via --&gt;
+&lt;link rel="stylesheet" href="Your_File_Name.css" /&gt;</pre>
+				For example you can use such styles.
+				Don`t give styles to wrapper or to item holder,
+				other way it will break the plugin work - if you dont do it carefully.
+					<pre class="css">
+#slider {
+	/* here we paste the style fore hole slider ontainer */
+}
+	#slider .item /* we can change this class in plugin parameters */ {
+		/* styles for items */
+	}</pre>
+				</p>
+				<p>
+					Then we inculde, if not included, jQuery library into <code class="html">&lt;head/&gt;</code> section:<br />
+					<pre class="html">&lt;script type="text/javascript" src="jquery-1.7.1.min.js" &gt;&lt;/script&gt;</pre>
+					And of course the sgSlider plugin itself, with plugin styles
+					<pre class="html">
+&lt;link type="text/css" rel="stylesheet" href="jquery.sgSlider_0.1.css" /&gt;
+&lt;script type="text/javascript" src="jquery.sgSlider_0.1.js"&gt;&lt;/script&gt;</pre>
+				</p>
+				<p>
+					Finally the javascript code itself:
+					<pre class="js">
+$(document).ready(function() {
+	$('#slider').sgSlider(); // if first murkup variant
+	$('#slider').sgSlider({ buildHTML: true }); // if second markup variant
+});</pre>
+					Theт we got smth like this:
+				</p>
+				<script type="text/javascript">
+					$(document).ready(function() {
+						$('#slider').sgSlider();
+					});
+				</script>
+				<div id="slider" class="largeSlider">
+					<div>
+					   <ul>
+							<li>
+								<table class="customStyleForCustomContent">
+									<tr>
+										<td>
+											The first Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent">
+									<tr>
+										<td>
+											The second Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent" >
+									<tr>
+										<td>
+											The third Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent" >
+									<tr>
+										<td>
+											The fourth Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent" >
+									<tr>
+										<td>
+											The fifth Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+					   </ul>
+					</div>
+				</div>
+				<p>
+				For simplicity you can copy this, but check if the file path are correct!!!
+				<pre class="expandableHtml">
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="en-US"&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;title&gt;sgSlider - simple jQuery slideshow plugin&lt;/title&gt;
+	&lt;!-- Enabeling jQuery lib --&gt;
+	&lt;script type="text/javascript" src="jquery-1.7.1.min.js"&gt;&lt;/script&gt;
+	
+	&lt;!-- Plugin itself --&gt;
+	&lt;link rel="stylesheet" href="plugin/jquery.sgSlider_0.1.css" /&gt;
+	&lt;script type="text/javascript" src="plugin/jquery.sgSlider_0.1.js"&gt;&lt;/script&gt;
+	
+	&lt;script type="text/javascript"&gt;
+		$(document).ready(function() {
+			$('#slider').sgSlider();
+		});
+	&lt;/script&gt;
+	&lt;style type="text/css"&gt;
+		/* main css */
+		body {
+			width: 600px; /* At moment slider will be very wide, so we limited it */
+			margin: 75px auto; /* ...and we can see it nicelly in the center :) */
+		}
+		/* for content styles */
+		.customStyleForCustomContent {
+			height: 100px;
+			width: 300px;
+			vertical-align: middle;
+			text-align: center;
+			font-size: 2em;
+			font-style: italic;
+			font-weight: bold;
+			color: white;
+			background-color: #B5B7B5;
+		 }
+			.customStyleForCustomContent:hover {
+				background-color: #B8BAB8;
+			}
+		/* for plugin arrows */
+			a.navi {
+				background-color: #D7D9D7;
+				color: #B5B7B5;
+				font-size: 3em;
+				font-weight: bold;
+				text-decoration: none;
+				text-align: center;
+				line-height: 0px;
+				padding-top: 46px;
+				position: absolute;
+				left: -22px;
+				top: 0;
+				height: 54px;
+				width: 22px;
+				z-index: 1;
+			}
+			a.navi.disabled {
+				display: none;
+				visibility: hidden;
+			}
+				a.navi:hover {
+					color: white;
+					background-color: #C6C8C6;
+				}
+				a.next {
+					left: auto;
+					right: -22px;
+				}
+	&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="slider" class="largeSlider"&gt;
+		&lt;div&gt;
+		   &lt;ul&gt;
+				&lt;li&gt;
+					&lt;table class="customStyleForCustomContent"&gt;
+						&lt;tr&gt;
+							&lt;td&gt;
+								The first Slide
+							&lt;/td&gt;
+						&lt;/tr&gt;
+					&lt;/table&gt;
+				&lt;/li&gt;
+				&lt;li&gt;
+					&lt;table class="customStyleForCustomContent"&gt;
+						&lt;tr&gt;
+							&lt;td&gt;
+								The second Slide
+							&lt;/td&gt;
+						&lt;/tr&gt;
+					&lt;/table&gt;
+				&lt;/li&gt;
+				&lt;li&gt;
+					&lt;table class="customStyleForCustomContent" &gt;
+						&lt;tr&gt;
+							&lt;td&gt;
+								The third Slide
+							&lt;/td&gt;
+						&lt;/tr&gt;
+					&lt;/table&gt;
+				&lt;/li&gt;
+				&lt;li&gt;
+					&lt;table class="customStyleForCustomContent" &gt;
+						&lt;tr&gt;
+							&lt;td&gt;
+								The fourth Slide
+							&lt;/td&gt;
+						&lt;/tr&gt;
+					&lt;/table&gt;
+				&lt;/li&gt;
+				&lt;li&gt;
+					&lt;table class="customStyleForCustomContent" &gt;
+						&lt;tr&gt;
+							&lt;td&gt;
+								The fifth Slide
+							&lt;/td&gt;
+						&lt;/tr&gt;
+					&lt;/table&gt;
+				&lt;/li&gt;
+		   &lt;/ul&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+			</p>
+			</article>
+			<h3 class="expandable">The Options <small>- click to expand</small></h3>
+			<article id="optionsList" class="h3text">
+				<h4>Layout options</h4>
+				<section>
+					<ul>
+						<li>
+							<div class="desc">Change to true if you want to build the 2 wrapp div`s</div>
+							<div class="content">buildHTML: <span class="default">false</span>,</div>
+						</li>
+						<li>
+							<div class="desc">Css selector, for specific items to be placed in slider. (Only for buildHTML: <span class="default">true</span>)</div>
+							<div class="content">wrapSelector: <span class="default">''</span>,</div>
+						</li>
+						<li>
+							<div class="content">carcass: 
+								<div class="desc">Variable classes for each wrapp level</div>
+								{<ul>
+									<li>
+										<div class="desc"> Class for the main element</div>
+										<div class="content">container: <span class="default">'container'</span>,</div>
+									</li>
+									<li>
+										<div class="desc"> The wrapper class, this obj wrapps the view.</div>
+										<div class="content">wrapper: <span class="default">'wrapper'</span>,</div>
+									</li>
+									<li>
+										<div class="desc">This class is for item holder</div>
+										<div class="content">itemHolder: <span class="default">'item-holder'</span>,</div>
+									</li>
+									<li>
+										<div class="desc">And finaly class for each item in the item holder.</div>
+										<div class="content">item: <span class="default">'item'</span></div>
+									</li>
+								</ul>},
+							</div>
+						</li>
+						<li>
+							<div class="content">navigation: 
+							<div class="desc">The next/prev navigation buttons properties</div>
+								{<ul>
+									<li>
+										<div class="desc">You want to use navigation buttons?</div>
+										<div class="content">use: <span class="default">true</span>,</div>
+									</li>
+									<li>
+										<div class="desc">You can give the specific class for "Go to Next" button</div>
+										<div class="content">classNext: <span class="default">'next'</span>,</div>
+									</li>
+									<li>
+										<div class="desc">You can give the specific class for "Go to Prev" button</div>
+										<div class="content">classPrev: <span class="default">'previous'</span>,</div>
+									</li>
+									<li>
+										<div class="content">text:
+											<div class="desc">Change the buttons content, simple text or HTML markup for...</div>
+											{<ul>
+												<li>
+													<div class="desc">"go to Previous" button, or/and for...</div>
+													<div class="content">prev: <span class="default">'‹'</span>,</div>
+												</li>
+												<li>
+													<div class="desc">... "go to Next" button</div>
+													<div class="content">next: <span class="default">'›'</span>.</div>
+												</li>
+											</ul>},
+										</div>
+									</li>
+									<li>
+										<div class="desc">What "bind-type" events bind to those buttons</div>
+										<div class="content">bind: <span class="default">'click'</span></div>
+									</li>
+								</ul>},
+							</div>
+						</li>
+					</ul>
+				</section>
+				<h4>Slider behaviour options</h4>
+				<section>
+					<ul>
+						<li>
+							<div class="desc">If vertical position, check if height is previously setted, otherway it wil be zero-height</div>
+							<div class="content">vertical: <span class="default">false</span>,</div>
+						</li>
+						<li>
+							<div class="desc">If next will be equal to current positio minus step </div>
+							<div class="content">reverse: <span class="default">false</span>,</div>
+						</li>
+						<li>
+							<div class="content">carousell: 
+								<div class="desc">The carousell/circular options (must have more idias for this section :) ):</div>
+								{<ul>
+									<li>
+										<div class="desc">Enable it?</div>
+										<div class="content">enable: <span class="default">false</span>,</div>
+									</li>
+									<li>
+										<div class="desc">Animate it to one direction (set oposit with reverse: <span class="default">true</span>)</div>
+										<div class="content">oneDirection: <span class="default">false</span></div>
+									</li>
+								</ul>},
+							</div>
+						</li>
+						<li>
+							<div class="desc">The most important part for navigation buttons: <span class="default">'full'</span>, <span class="default">'N'</span> items or <span class="default">'Npx'</span> where N is number.</div>
+							<div class="content">step: <span class="default">'full'</span>,</div>
+						</li>
+						<li>
+							<div class="desc">If there a current item, how to align it? - <span class="default">'left'</span>=<span class="default">'top'</span>, <span class="default">'center'</span>, <span class="default">'right'</span>=<span class="default">'bottom'</span></div>
+							<div class="content">align: <span class="default">'center'</span>,</div>
+						</li>
+						<li>
+							<div class="desc">Where we start? - <span class="default">'N'</span> items or <span class="default">'Npx'</span> where N is number.</div>
+							<div class="content">startPosition: <span class="default">'0px'</span>,</div>
+						</li>
+						<li>
+							<div class="content">currOnHover: 
+								<div class="desc">Make hovered item current after timeout</div>
+								{<ul>
+									<li>
+										<div class="desc">Eneble this?</div>
+										<div class="content">enable: <span class="default">false</span>,</div>
+									</li>
+									<li>
+										<div class="desc">Timeout in miliseconds</div>
+										<div class="content">timeout: <span class="default">500</span></div>
+									</li>
+								</ul>
+								},
+							</div>
+						</li>
+						<li>
+							<div class="content">scrollOnHover:
+							<div class="desc">Scroll the slider while hovering above</div>
+								{<ul>
+									<li>
+										<div class="desc">Enable this feature?</div>
+										<div class="content">enable: <span class="default">false</span>,</div>
+									</li>
+									<li>
+										<div class="desc">If there is a current item, return after returnToCurrentTimeout ms?</div>
+										<div class="content">returnToCurrent: <span class="default">true</span>,</div>
+									</li>
+									<li>
+										<div class="desc">Time in ms after we return to current item position, with right align option</div>
+										<div class="content">returnToCurrentTimeout: <span class="default">1000</span>,</div>
+									</li>
+									<li>
+										<div class="desc">Give some borders relative first/last slade scroll size, for "nonscrolling" to border limits</div>
+										<div class="content">sizeIndent: <span class="default">0.5</span>,</div>
+									</li>
+									<li>
+										<div class="desc">For non jumping, specify in percent relation to item holder size, else it will use an animate function</div>
+										<div class="content">maxJump: <span class="default">0.1</span>,</div>
+									</li>
+									<li>
+										<div class="desc">Time of animation if we exceded the item maxJump value (nead to resentense this comment... :()</div>
+										<div class="content">offsetAnimateTime: <span class="default">500</span></div>
+									</li>
+								</ul>
+								},
+							</div>
+						</li>
+						<li>
+							<div class="desc">Animate if animation ends?</div>
+							<div class="content">animateWhenShowEnds: <span class="default">false</span>,</div>
+						</li>
+						<li>
+							<div class="desc">The time of main animation (when goin to next/prev or to specific item)</div>
+							<div class="content">speed: <span class="default">1200</span>,</div>
+						</li>
+						<li>
+							<div class="desc">And easing effect for main animation. (will be nice to integrate it to scrollOnHover animation)</div>
+							<div class="content">easing: <span class="default">'linear'</span>,</div>
+						</li>
+						<li>
+							<div class="content">autoNext:
+								<div class="desc">Do some automaticks... </div>
+								{<ul>
+									<li>
+										<div class="desc">Enabling auto sider movements</div>
+										<div class="content">enable: <span class="default">false</span>, </div>
+									</li>
+									<li>
+										<div class="desc">Path to do auto movements: <span class="default">['+Npx', 'Npx', N,-N,...]</span> or to disable set to <span class="default">null</span></div>
+										<div class="content">way: <span class="default">null</span>, </div>
+									</li>
+									<li>
+										<div class="desc">Repeat the auto movemnts: <span class="default">true</span>, <span class="default">false</span>, <span class="default">(int)N</span></div>
+										<div class="content">repeat: <span class="default">true</span>,
+										</div>
+									</li>
+									<li>
+										<div class="desc">Timeout when next movment will be triggered: <span class="default">(int)N</span></div>
+										<div class="content">timeout: <span class="default">3475</span>, </div>
+									</li>
+									<li>
+										<div class="content">delay:
+											<div class="desc">Delay options after listed action was triggered inside plugin</div>
+											{<ul>
+												<li>
+													<div class="desc">Delay stops the autoNext, and start again after multiplied timeout </div>
+													<div class="content">multiply: <span class="default">3</span>,
+													</div>
+												</li>
+												<li>
+													<div class="desc">This actions enabelign delay... </div>
+													<div class="content">onAction: <span class="default">'anext aprev'</span>
+													</div>
+												</li>
+											</ul>}
+										</div>
+									</li>
+								</ul>},
+							 </div>
+						</li>
+					</ul>
+				</section>
+				<h4>Callback functions</h4>
+				<section>
+					<ul>
+						<li>
+							<div class="desc">When the sliders started. Best use for hidding the slider and show it smothly, for non-jumping page layout</div>
+							<div class="content">onStart: <span class="default">function() {}</span>,</div>
+						</li>
+						<li>
+							<div class="desc">When the current elements is specified. <span class="default">obj</span> - the jQuery object of this item.</div>
+							<div class="content">onCurr: <span class="default">function(obj) {}</span>,</div>
+						</li>
+						<li>
+							<div class="desc">Function when main animation starts.</div>
+							<div class="content">onAniStart: <span class="default">function() {}</span>,</div>
+						</li>
+						<li>
+							<div class="desc">Function when main animation ends.</div>
+							<div class="content">onAniEnd: <span class="default">function() {}</span></div>
+						</li>
+					</ul>
+				</section>
+				<h4>Some samples what we used in demonstration section</h4>
+				<p>
+					<pre class="js">
+$(document).ready(function() {
+	$('#sliderDiferentHWBottom').sgSlider({
+		step: '2',
+		navigation: { use: true },
+		autoNext: {
+			enable: true,
+			way: [1,'+4','1300px',-7], // Sign '+' does`n go as string if asigned as int. So we forced the string type.
+			repeat: 7
+		},
+		animateWhenShowEnds: true,
+		currOnHover: {enable: true},
+		onStart: function() {
+			$('#sliderDiferentHWBottom').css({overflow: 'visible', visibility: 'visible'}).fadeTo(0,0).fadeTo(3000,1);
+		}
+	});
+	$('#sliderDiferentHWTop').sgSlider({
+		navigation: { use: false },
+		autoNext: {
+			enable: true
+		},
+		scrollOnHover: {enable: true, maxJump: 0.3},
+		onStart: function() {
+			$('#sliderDiferentHWTop').css({overflow: 'visible', visibility: 'visible'}).fadeTo(0,0).fadeTo(3000,1);
+		}
+	});
+	$('#sliderVerticalWide').sgSlider({
+		vertical: true,
+		reverse: true,
+		autoNext: {
+			enable: true
+		},
+		navigation: { text: {
+			prev: 'scroll Top',
+			next: 'scroll Down'
+		} },
+		onStart: function() {
+			$('#sliderVerticalWide').css({overflow: 'visible', visibility: 'visible'}).fadeTo(0,0).fadeTo(3000,1);
+		}
+	});
+	$('#sliderVerticalWide2').sgSlider({
+		vertical: true,
+		step: '2',
+		autoNext: {
+			enable: true
+		},
+		animateWhenShowEnds: true,
+		carousell: {
+			enable: true
+		},
+		navigation: { text: {
+			prev: 'scroll Top',
+			next: 'scroll Down'
+		} },
+		onStart: function() {
+			$('#sliderVerticalWide2').css({overflow: 'visible', visibility: 'visible'}).fadeTo(0,0).fadeTo(3000,1);
+		}
+	});
+});</pre>
+				</p>
+			</article>
+			<h3 class="expandable">The Best Way to Use <small>- click to expand</small></h3>
+			<article class="h3text">
+				<p>
+					See simple Guide for basic install
+				</p>
+				<p>
+					We have such result by simply markuping the list and styling the items:
+				</p>
+				<div id="slider" class="largeSlider">
+					<div>
+					   <ul>
+							<li>
+								<table class="customStyleForCustomContent">
+									<tr>
+										<td>
+											The first Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent">
+									<tr>
+										<td>
+											The second Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent" >
+									<tr>
+										<td>
+											The third Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent" >
+									<tr>
+										<td>
+											The fourth Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent" >
+									<tr>
+										<td>
+											The fifth Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+					   </ul>
+					</div>
+				</div>
+				<h4>First Option</h4>
+				<p>
+					Now we give such styles:
+					<pre class="css">
+#sliderBestWay {
+	/* Of course for this method we must set the max transerve size of an item*/
+	height: 100px;
+	/*
+	in case vertical: true - set width: Npx,
+	and set actual height for vertical slider size, otherwize it will be height = 0 :)
+	*/
+	overflow: hidden;
+}
+	#sliderBestWay.container { 
+		/* Must be so, because we wont see the prev/next buttons */
+		overflow: visible;
+	}
+	#sliderBestWay ul,
+	#sliderBestWay li {
+		padding: 0px;
+		margin: 0px;
+		list-style: none;
+	}
+	/* and aproximate view will be like this*/
+		#sliderBestWay ul {
+			width: 200%;
+			/* in case vertical: true - set height: 200% */
+		}
+		#sliderBestWay li {
+			float: left;
+		}</pre>
+					And anabeling the sgSlider
+					<pre class="js" id="BestWay-first">
+$(document).ready(function() {
+    $('#sliderBestWay').sgSlider();
+});</pre>
+					<a href="javascript:;" onclick="eval($('#BestWay-first').text()); $(this).remove(); return false;" title="Click this link to make the mark sing!!!">
+						Launch the code above!!!
+					</a>
+				</p>
+				<style type="text/css">
+					#sliderBestWay {
+						/* Of course for this method we must set the max transerve size of an item*/
+						height: 100px;
+						/*
+						in case vertical: true - set width: Npx,
+						and set actual height for vertical slider size, otherwize it will be height = 0 :)
+						*/
+						overflow: hidden;
+					}
+						#sliderBestWay.container { 
+							/* Must be so, because we wont see the prev/next buttons */
+							overflow: visible;
+						}
+						#sliderBestWay ul,
+						#sliderBestWay li {
+							padding: 0px;
+							margin: 0px;
+							list-style: none;
+						}
+						/* and aproximate view will be like this*/
+							#sliderBestWay ul {
+								width: 200%;
+								/* in case vertical: true - set height: 200% */
+							}
+							#sliderBestWay li {
+								float: left;
+							}
+				</style>
+				<div id="sliderBestWay" class="largeSlider">
+					<div>
+					   <ul>
+							<li>
+								<table class="customStyleForCustomContent">
+									<tr>
+										<td>
+											The first Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent">
+									<tr>
+										<td>
+											The second Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent" >
+									<tr>
+										<td>
+											The third Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent" >
+									<tr>
+										<td>
+											The fourth Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent" >
+									<tr>
+										<td>
+											The fifth Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+					   </ul>
+					</div>
+				</div>
+				<h4>Second Option</h4>
+				<p>
+					Or simply set to <code class="css">visibility: hidden;</code>, set max sizes and wrapping sizes with <code class="css">overfow: hidden;</code>:
+					<pre class="css">
+#sliderBestWay_fade {
+	height: 100px;
+	/* prevent overflowing the height above */
+	overflow: hidden;
+	visibility: hidden;
+}</pre>
+					and show result with help of callback function <code class="js">onStart()</code> after sgSlider starts:
+					<pre class="js" id="BestWay-second">
+$(document).ready(function() {
+    $('#sliderBestWay_fade').sgSlider({
+		onStart: function() {
+			$('#sliderBestWay_fade').css({
+				overflow: 'visible',
+				visibility: 'visible'
+			})
+			.fadeTo(0,0)
+			.fadeTo(1000,1);
+		}
+	});
+});</pre>
+					<a href="javascript:;" onclick="eval($('#BestWay-second').text()); $(this).add('#hint1').remove(); return false;" title="Click this link to make the mark sing!!!">
+						Launch the code above!!!
+					</a>
+				</p>
+				<style type="text/css">
+					#sliderBestWay_fade {
+						height: 100px;
+						/* prevent overflowing the height above */
+						overflow: hidden;
+						visibility: hidden;
+					}
+				</style>
+				<div id="hint1">
+					Here must be an slider, click the link above to launch the code
+				</div>
+				<div id="sliderBestWay_fade" class="largeSlider">
+					<div>
+					   <ul>
+							<li>
+								<table class="customStyleForCustomContent">
+									<tr>
+										<td>
+											The first Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent">
+									<tr>
+										<td>
+											The second Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent" >
+									<tr>
+										<td>
+											The third Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent" >
+									<tr>
+										<td>
+											The fourth Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+							<li>
+								<table class="customStyleForCustomContent" >
+									<tr>
+										<td>
+											The fifth Slide
+										</td>
+									</tr>
+								</table>
+							</li>
+					   </ul>
+					</div>
+				</div>
+				<p>
+					Its obvious that it will starts automaticly, you don`t need to click on a link :)
+				</p>
+			</article>
+	</section>
+</body>
+</html>
+

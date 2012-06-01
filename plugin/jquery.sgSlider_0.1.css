@@ -1,0 +1,34 @@
+.sgSlider-container {
+	position: relative;
+}
+	.sgSlider-wrapper {
+		position: relative;
+		overflow: hidden;
+	}
+	.sgSlider-container.vertical .sgSlider-wrapper {
+		height: 100%;
+	}
+		.sgSlider-itemHolder {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			padding: 0px;
+			margin: 0px;
+		}
+		.sgSlider-container.reverse .sgSlider-itemHolder {
+			list-style: none;
+			left: auto;
+			right: 0px;
+			top: auto;
+			bottom: 0px;
+		}
+			.sgSlider-item {
+				list-style: none;
+				display: block;
+				float: left;
+				padding: 0px;
+				margin: 0px;
+			}
+			.sgSlider-item a img {
+				border-width: 0px;
+			}

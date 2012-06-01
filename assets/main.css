@@ -1,0 +1,42 @@
+html, body { min-height: 100%; min-width: 100%; padding: 0px; margin: 0px; }
+body {
+	background-color: #F4F4F4;
+	font: 14px/1.5em Georgia,serif;
+}
+h1, h2,h3, h4 { color: #432100; text-align: center; }
+	h1 small, h2 small, h3 small, h4 small {font-size: 0.8em; color: #BA9877;}
+h1 {font-size: 32px; padding: 0 0 16px 0; margin: 0 0 16px 0; }
+h2 {font-size: 24px; padding: 19px 0 12px 0; margin: 19px 0 12px 0;}
+h3 {font-size: 18px; padding: 16px 0 9px 0; margin: 16px 0 9px 0;}
+	h3:hover { background-color: #FDFDFD; }
+h4 { text-align: left; }
+
+div.hr1 { color: #BA9877; border-bottom: 3px solid #BA9877; }
+div.hr2 { color: #BA9877; border-bottom: 2px dotted #BA9877; }
+
+section#root {
+	background-color: white;
+	border: 10px solid #FaFaFa;
+	padding: 30px 55px;
+	margin: 30px auto;
+	width: 900px;
+}
+	code.html { color: blue; }
+	code.css { color: green; }
+	code.js { color: maroon; }
+	h3.expandable:hover { cursor: pointer; background-color: #FAFAFA; }
+	article.h3text { position: relative; height: 0px; padding: 0 22px; margin-left:-44px; overflow: hidden; }
+	
+	article#optionsList li { list-style: none; border-bottom: 1px dashed white; }
+		article#optionsList li  div.content { font-weight: bold; }
+			article#optionsList li  span.default { margin-left: 10px; font-weight: normal; color: #777; letter-spacing: 2px; }
+			article#optionsList li  div.desc span.default { margin-left: 0; }
+			
+	article#optionsList li:hover { border-color: #777; }
+		article#optionsList li:hover div.desc { color: #444; }
+		
+		article#optionsList li  div.desc, article#optionsList li:hover li  div.desc, article#optionsList li:hover li:hover li div.desc { float: right; color: #AAA; font-weight: normal; }
+			article#optionsList li  li:hover div.desc { color: #777; }
+			article#optionsList li li li:hover  div.desc { color: #999; }
+/* ie7 fix */
+article#optionsList li  div.desc { *display: none; }
